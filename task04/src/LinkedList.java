@@ -14,7 +14,7 @@ public class LinkedList {
     private Node last;
     private int size = 0;
 
-    public void addFirst(int item) {
+    public void addFirst(int item) {//O(1)
         Node node = new Node(item);//بكريت النود الجديده
 
         if (isEmpty()) {//في حالة مكانش في ولا نود
@@ -27,7 +27,7 @@ public class LinkedList {
         size++;
     }
 
-    public void addLast(int item) {
+    public void addLast(int item) {//O(1)
         Node node = new Node(item);
         if (isEmpty()) {
             first = last = node;
@@ -39,7 +39,7 @@ public class LinkedList {
         size++;
     }
 
-    public void removeFirst() {
+    public void removeFirst() {//O(1)
         if (isEmpty()) {//لو معنديش عناصر خالص
             throw new NoSuchElementException("empty List");
         }
@@ -54,7 +54,7 @@ public class LinkedList {
         size--;
     }
 
-    public void removeLast() {
+    public void removeLast() {//O(1)
         if (isEmpty()) {
             throw new NoSuchElementException("empty List");
         }
@@ -69,7 +69,7 @@ public class LinkedList {
         size--;
     }
 
-    private Node getBeforeLast() {
+    private Node getBeforeLast() {//O(n)
         Node beforeList = first;
         Node current = first;
 
@@ -80,11 +80,12 @@ public class LinkedList {
         return beforeList;
     }
 
-    private boolean isEmpty() {
+    private boolean isEmpty() {//O(1)
+
         return first == null;
     }
 
-    public int indexOf(int item) {
+    public int indexOf(int item) {//o(n)
 
         Node current = first;
         int index = 0;
@@ -98,13 +99,63 @@ public class LinkedList {
         return -1;
     }
 
-    public boolean contains(int value) {
+    public boolean contains(int value) {//O(1)
         int index = indexOf(value);
 
         return index != -1;
     }
 
-    public int size() {//هترجع عدد العناصر في اللينكد ليست
+    public int size() {//هترجع عدد العناصر في اللينكد ليست O(1)
         return size;
+    }
+
+
+    public int max() {//O(n)
+        if (isEmpty()) {
+            throw new NoSuchElementException("empty List");
+        }
+
+        int max = first.value;
+        Node current = first.nextNode;
+
+        while (current != null) {
+            if (current.value > max) {
+                max = current.value;
+            }
+            current = current.nextNode;
+        }
+
+        return max;
+    }
+
+    public int min() {//O(n)
+        if (isEmpty()) {
+            throw new NoSuchElementException("empty List");
+        }
+
+        int min = first.value;
+        Node current = first.nextNode;
+
+        while (current != null) {
+            if (current.value < min) {
+                min = current.value;
+            }
+            current = current.nextNode;
+        }
+
+        return min;
+    }
+
+    public void printElements() {//O(n)
+        if (isEmpty()) {
+            throw new NoSuchElementException("empty List");
+        } else {
+            Node current = first;
+            while (current != null) {
+                System.out.print(current.value + " ");
+                current = current.nextNode;
+            }
+            System.out.println();
+        }
     }
 }
